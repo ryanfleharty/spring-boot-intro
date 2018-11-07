@@ -37,10 +37,15 @@ Using MySQL to add a database to a Spring Boot Application
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!-- This dependency fixed an error. Thanks, stack overflow! -->
+        <!-- These two dependencies fix java version errors for newer Java -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.23.1-GA</version>
         </dependency>
 ```
 1. Before we try to connect to a database with our app, we have to create the database first. Create a schema using MySql Workbench (or regular SQL from your command line using homebrew-installed mysql)
@@ -58,17 +63,73 @@ spring.datasource.password=root
 spring.jpa.show-sql = true
 
 # ==============================================================
-# = Hibernate ddl auto (create, create-drop, update)
-# ==============================================================
-spring.jpa.hibernate.ddl-auto = update
-
-# ==============================================================
 # = The SQL dialect makes Hibernate generate better SQL for the chosen database
 # ==============================================================
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 ```
 
-1. Now let's make our Model and Repository for a Post. 
+1. Now let's make our Model and Repository for a Post. Java Spring Boot applications typically use the pattern of a class-defined Entity and an automatically configured "Repository" to connect with a database table.
+
+1. Let's start with a model. Create a new class in your package and name it `Post.java`. You can define your Post class as follows:
+
+```java
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Table(name="Post")
+public class Post {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String textInput){
+        this.text = textInput;
+    }
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
+}
+```
+
+1. Now we need a Repository to set up queries based on this model. Fortunately, Spring Boot has made this file extremely easy to set up:
+
+```java
+// This will be AUTO IMPLEMENTED by Spring into a Bean called postRepository
+// CRUD refers Create, Read, Update, Delete
+
+public interface PostRepository extends CrudRepository<Post, Integer> {
+
+}
+```
+
+1. That's it! Now we need to make some slight modifications to our Controller to allow it to use this repository to make queries. Add the following snippet inside the class definition for your controller.
+```java
+    @Autowired
+    private PostRepository postRepository;
+```
+
+1. Now, you can set up a route that will fetch all of the posts and return them!
+```java
+    @GetMapping("/posts")
+    public Iterable<Post> getPosts(){
+        return postRepository.findAll();
+    }
+```
 
 ### Try it out!
 
