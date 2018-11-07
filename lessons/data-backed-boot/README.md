@@ -13,7 +13,7 @@ Using MySQL to add a database to a Spring Boot Application
 #### Prerequisites
 
 - A basic spring boot application
-- [Installing MySql and MySql Workbench](./Installing-MySql-Workbench)
+- [Installing MySql and MySql Workbench](./Installing-MySql-Workbench.md)
 
 ---
 
