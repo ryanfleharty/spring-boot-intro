@@ -19,79 +19,56 @@ Using MySQL to add a database to a Spring Boot Application
 
 ## Getting Started
 
-1. In your intelliJ text editor, start a new project configured with Maven. You should see the familiar src/main/java folder structure from the lesson on building Maven projects.
+1. Follow the instructions in the [previous lesson](../starting-a-boot-project) to set up a basic Spring Boot web application.
 
-1. Inside of pom.xml, we'll add the necessary dependency to get started with Spring Boot. Fortunately, the necessary packages to quickly get a project running have been bundled into `starters`. Add the following to your pom.xml file:
+1. Inside of pom.xml, we'll add some new dependencies to allow us to connect with a MySql database. Add the following to the list of dependencies in your pom.xml file:
 ```xml
-    <!-- > Define the project as using spring boot starters <-->
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
-    </parent>
-    <!-- > Add a starter to your list of dependencies. 
-    This is where new packages will be added as we add functionality. <-->
-    <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-    </dependencies>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+        <!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!-- Use MySQL Connector-J -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- This dependency fixed an error. Thanks, stack overflow! -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+        </dependency>
 ```
+1. Before we try to connect to a database with our app, we have to create the database first. Create a schema using MySql Workbench (or regular SQL from your command line using homebrew-installed mysql)
 
-1. Now that our dependencies are set up, let's create a new package inside the src/main/java folder. Let's just call it `hello` for our classic hello world example.
-
-1. Create a new class called `Application` to serve as the entry point into our app. This class will contain our `main` function, which will actually run the application. 
-
-``` java
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args){
-        System.out.println("Hello out there!");
-        SpringApplication.run(Application.class, args);
-    }
-}
-```
-
-1. You should notice our first use of an Annotation above a class definition. Annotations add functionality to a class, and will be used frequently throughout Spring Boot applications. You can also test out intelliJ's auto-import feature by deleting the import statements, causing the annotation to turn red. You can right click and import or click it and hit option+enter to add the import statement.
-
-1. Let's test drive the app now! From the root directory of the project in your command line, run the command `mvn package`. This will install the dependencies and bundle our app into a single executable `.jar` file. You should see Maven building and compiling our project, and hopefully see a BUILD SUCCESS message.
-
-1. Now that Maven has packaged the project, you can run the `.jar` file that lives inside the `/target` directory. Run the command: `java -jar target/<project-name>-1.0-SNAPSHOT.jar`. Use autocomplete to help you with this command instead of typing out the whole long file name.
-
-1. When you run the file, you should see a whole bunch of output in the terminal, and at the top should be your "hello world" message!
-
-1. So what? We got a file to log a message, big deal. Let's add a RestController to allow us to respond to requests! Make another class in the same package as your Application class, and add the following to it:
+1. We will also need to set up some configuration for jdbc (java database connector) to know where our database lives and what credentials it needs to use. Inside the src/main/resources folder, create a file called `application.properties` and add the following, making sure to change YOUR_DATABASE_NAME to the actual name of the schema you created in MySql Workbench for this project.
 ```java
-@RestController
-public class HelloWorld {
-    @GetMapping("/")
-    public String hello(){
-        return "hello out there";
-    }
-}
+spring.jpa.hibernate.dll-auto=create
+spring.datasource.url= jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
+spring.datasource.username=root
+spring.datasource.password=root
+
+# ==============================================================
+# = Show or not log for each sql query
+# ==============================================================
+spring.jpa.show-sql = true
+
+# ==============================================================
+# = Hibernate ddl auto (create, create-drop, update)
+# ==============================================================
+spring.jpa.hibernate.ddl-auto = update
+
+# ==============================================================
+# = The SQL dialect makes Hibernate generate better SQL for the chosen database
+# ==============================================================
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 ```
 
-1. More annotations! This time, @RestController lets us configure a class to be a Spring Boot Controller, and @GetMapping lets us accept a GET request at a specific route and respond by executing our function. You will need to auto-import these annotations before running the app! You can imagine there must also be @PostMapping to accept POST requests, and a more general @RequestMapping would let you accept requests of any method. 
-
-1. Now that you've made a change to the app, re-package it with `mvn package` and run the file again. This time, if you visit localhost:8080 in your browser, you should see your message!
+1. Now let's make our Model and Repository for a Post. 
 
 ### Try it out!
 
