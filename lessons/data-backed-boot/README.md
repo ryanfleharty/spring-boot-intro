@@ -25,12 +25,10 @@ Inside of pom.xml, we'll add some new dependencies to allow us to connect with a
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <!-- JPA Data (We are going to use Repositories, Entities, Hibernate, etc...) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- Use MySQL Connector-J -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -55,15 +53,6 @@ spring.datasource.url= jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
 spring.datasource.username=root
 spring.datasource.password=root
 
-# ==============================================================
-# = Show or not log for each sql query
-# ==============================================================
-spring.jpa.show-sql = true
-
-# ==============================================================
-# = The SQL dialect makes Hibernate generate better SQL for the chosen database
-# ==============================================================
-spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 ```
 
 Now let's make our Model and Repository for a Post. Java Spring Boot applications typically use the pattern of a class-defined Entity and an automatically configured "Repository" to connect with a database table.
@@ -139,10 +128,14 @@ POST requests can be mapped to the attributes of the model you're trying to crea
 
 ### Try it out!
 
-Finish the other five RESTful routes for posts and verify functionality using Postman to test each route. 
+Finish the other five RESTful routes for posts and verify functionality using Postman to test each route. Then, try it again with a User model with usernames and passwords- avoid copy-pasting the Post Controller to attempt to recall as much as you can of how to set up a controller, model, and repository. 
 
 
-### Resources
+### Stretch Goals
+
+- Add [project lombok](https://projectlombok.org/) to refactor and simplify your Models
+- Try connecting to MongoDB instead of MySql
+- Speed up common requests with [caching](https://spring.io/guides/gs/caching/)
 
 ---
 

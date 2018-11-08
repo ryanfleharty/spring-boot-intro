@@ -16,6 +16,21 @@ Create an app with two inter-related models.
 
 ---
 
+Add a private user field of type User to your Post model, which will represent the foreign key pointing to the post's creator. Be sure to add a getter and setter for the user field as well. Add the following annotations to that field:
+
+```java
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+```
+
+The @ManyToOne annotation says that this field of the post model will create a relationship with another table, where Post is the "many" side and the User is the "one" side (i.e. one user has many posts. Many posts can be joined to One user.)
+
+The @JoinColumn specifices which column in the post table will hold the foreign key- the id that links to a different table. 
+
+This will also change the way we create a post, considering that the user's id won't be in the POST data sent in the request. We won't be implementing authentication quite yet, but we should set up our createPost function to allow for a user to be connected to each post. Use the UserRepository to query for a specific user (could be any existing user- we're just hardcoding the creator of each post for now) and attach them to each post you create.
+
+
 
 ### Try it out!
 
