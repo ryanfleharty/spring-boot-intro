@@ -73,17 +73,13 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 1. Let's start with a model. Create a new class in your package and name it `Post.java`. You can define your Post class as follows:
 
 ```java
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Post")
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String text;
@@ -131,9 +127,18 @@ public interface PostRepository extends CrudRepository<Post, Integer> {
     }
 ```
 
+1. POST requests can be mapped to the attributes of the model you're trying to create. @ModelAttribute can be used inside the parameters of a controller function to define the post data according to a model.
+```java
+    @PostMapping("/posts")
+    public Post createPost(@ModelAttribute Post post){
+        Post createdPost = postRepository.save(post);
+        return createdPost;
+    }
+```
+
 ### Try it out!
 
-Using Postman to test your routes, try setting up the full suite of 7 RESTful routes for a specific resource. Respond only with strings at this point that should send messages back confirming success of the request. You will have to look up how to use route parameters in a spring boot application!
+Finish the other five RESTful routes for posts and verify functionality using Postman to test each route. 
 
 
 ### Resources
