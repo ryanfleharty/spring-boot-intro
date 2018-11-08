@@ -19,9 +19,10 @@ Using Maven to build a Spring Boot project.
 
 ## Getting Started
 
-1. In your intelliJ text editor, start a new project configured with Maven. You should see the familiar src/main/java folder structure from the lesson on building Maven projects.
+In your intelliJ text editor, start a new project configured with Maven. You should see the familiar src/main/java folder structure from the lesson on building Maven projects.
 
-1. Inside of pom.xml, we'll add the necessary dependency to get started with Spring Boot. Fortunately, the necessary packages to quickly get a project running have been bundled into `starters`. Add the following to your pom.xml file:
+Inside of pom.xml, we'll add the necessary dependency to get started with Spring Boot. Fortunately, the necessary packages to quickly get a project running have been bundled into `starters`. Add the following to your pom.xml file:
+
 ```xml
     <!-- > Define the project as using spring boot starters <-->
     <parent>
@@ -42,7 +43,6 @@ Using Maven to build a Spring Boot project.
         <java.version>1.8</java.version>
     </properties>
 
-
     <build>
         <plugins>
             <plugin>
@@ -53,9 +53,9 @@ Using Maven to build a Spring Boot project.
     </build>
 ```
 
-1. Now that our dependencies are set up, let's create a new package inside the src/main/java folder. Let's just call it `hello` for our classic hello world example.
+Now that our dependencies are set up, let's create a new package inside the src/main/java folder. Let's just call it `hello` for our classic hello world example.
 
-1. Create a new class called `Application` to serve as the entry point into our app. This class will contain our `main` function, which will actually run the application. 
+Create a new class called `Application` to serve as the entry point into our app. This class will contain our `main` function, which will actually run the application. 
 
 ``` java
 import org.springframework.boot.SpringApplication;
@@ -70,15 +70,16 @@ public class Application {
 }
 ```
 
-1. You should notice our first use of an Annotation above a class definition. Annotations add functionality to a class, and will be used frequently throughout Spring Boot applications. You can also test out intelliJ's auto-import feature by deleting the import statements, causing the annotation to turn red. You can right click and import or click it and hit option+enter to add the import statement.
+You should notice our first use of an Annotation above a class definition. Annotations add functionality to a class, and will be used frequently throughout Spring Boot applications. You can also test out intelliJ's auto-import feature by deleting the import statements, causing the annotation to turn red. You can right click and import or click it and hit option+enter to add the import statement.
 
-1. Let's test drive the app now! From the root directory of the project in your command line, run the command `mvn package`. This will install the dependencies and bundle our app into a single executable `.jar` file. You should see Maven building and compiling our project, and hopefully see a BUILD SUCCESS message.
+Let's test drive the app now! From the root directory of the project in your command line, run the command `mvn package`. This will install the dependencies and bundle our app into a single executable `.jar` file. You should see Maven building and compiling our project, and hopefully see a BUILD SUCCESS message.
 
-1. Now that Maven has packaged the project, you can run the `.jar` file that lives inside the `/target` directory. Run the command: `java -jar target/<project-name>-1.0-SNAPSHOT.jar`. Use autocomplete to help you with this command instead of typing out the whole long file name.
+Now that Maven has packaged the project, you can run the `.jar` file that lives inside the `/target` directory. Run the command: `java -jar target/<project-name>-1.0-SNAPSHOT.jar`. Use autocomplete to help you with this command instead of typing out the whole long file name.
 
-1. When you run the file, you should see a whole bunch of output in the terminal, and at the top should be your "hello world" message!
+When you run the file, you should see a whole bunch of output in the terminal, and at the top should be your "hello world" message.
 
-1. So what? We got a file to log a message, big deal. Let's add a RestController to allow us to respond to requests! Make another class in the same package as your Application class, and add the following to it:
+So what? We got a server to log a message, big deal. Let's add a RestController to allow us to respond to requests! Make another class in the same package as your Application class, and add the following to it:
+
 ```java
 @RestController
 public class HelloWorld {
@@ -89,9 +90,9 @@ public class HelloWorld {
 }
 ```
 
-1. More annotations! This time, @RestController lets us configure a class to be a Spring Boot Controller, and @GetMapping lets us accept a GET request at a specific route and respond by executing our function. You will need to auto-import these annotations before running the app! You can imagine there must also be @PostMapping to accept POST requests, and a more general @RequestMapping would let you accept requests of any method. 
+More annotations! This time, @RestController lets us configure a class to be a Spring Boot Controller, and @GetMapping lets us accept a GET request at a specific route and respond by executing our function. You will need to auto-import these annotations before running the app! You can imagine there must also be @PostMapping to accept POST requests, and a more general @RequestMapping would let you accept requests of any method. 
 
-1. Now that you've made a change to the app, re-package it with `mvn package` and run the file again. This time, if you visit localhost:8080 in your browser, you should see your message!
+Now that you've made a change to the app, re-package it with `mvn package` and run the file again. This time, if you visit localhost:8080 in your browser, you should see your message!
 
 ### Try it out!
 
