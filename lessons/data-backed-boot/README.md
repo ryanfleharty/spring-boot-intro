@@ -17,8 +17,6 @@ Using MySQL to add a database to a Spring Boot Application
 
 ---
 
-## Getting Started
-
 1. Follow the instructions in the [previous lesson](../starting-a-boot-project) to set up a basic Spring Boot web application.
 
 1. Inside of pom.xml, we'll add some new dependencies to allow us to connect with a MySql database. Add the following to the list of dependencies in your pom.xml file:
@@ -142,8 +140,6 @@ Finish the other five RESTful routes for posts and verify functionality using Po
 
 
 ### Resources
-
-- [Getting started with spring boot](https://spring.io/guides/gs/spring-boot/)
 
 ---
 
