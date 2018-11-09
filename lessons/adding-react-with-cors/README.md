@@ -38,7 +38,6 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true)
                 .allowedHeaders("*");
     }
-
 }
 ```
 
@@ -47,7 +46,6 @@ Now you can make requests from a react application!
 ### Try it out!
 
 Add a react front-end that allows you to create posts and users. Use a drop down menu when creating posts to allow the choice of which user the post should belong to. Have the associated posts shown in the user's Show page, and list the post's creator when showing posts in the index or show routes.
-
 
 ### Resources
 
