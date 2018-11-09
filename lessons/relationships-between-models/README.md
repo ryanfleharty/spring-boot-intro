@@ -38,6 +38,21 @@ Now when we query for a post, it will have the user attached. But what about the
 
 Here, `mappedBy` is referring to what property of the Post model refers to the specific user.  Cascading is a database term meaning that the related model will be affected by changes to the current model, i.e. if a user is deleted, so are their posts. 
 
+# Problem!
+
+If you query it now, you will get a circular reference causing infinite recursion! When you grab a post, it will grab the user, which will try to grab the associated posts, which will grab the user, which will try to grab the associated posts...
+
+There are several fixes to this issue, one of which is adding the following annotation to both models:
+
+```java
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+```
+
+You can google around for various other solutions to the problem of infinite recursion when loading associations with Hibernate in Spring Boot projects.
+
+
 ### Try it out!
 
 Use Postman to test full CRUDability of users and posts, making sure that when a user is deleted, so are their associated posts. Also, try adding another model that would establish one to many relationships, such as comments, and/or another model that would establish a many to many relationship, such as "liking" a post. 
