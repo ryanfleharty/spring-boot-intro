@@ -130,6 +130,8 @@ POST requests can be mapped to the attributes of the model you're trying to crea
 
 Finish the other five RESTful routes for posts and verify functionality using Postman to test each route. Then, try it again with a User model with usernames and passwords- avoid copy-pasting the Post Controller to attempt to recall as much as you can of how to set up a controller, model, and repository. 
 
+You will have to account for some difficulties along the way, such as dealing with the strange data type returned by the repository's FindById method, and how to accept route parameters. You may also want to figure out how to handle the submission of invalid data from the form.
+
 
 ### Stretch Goals
 
