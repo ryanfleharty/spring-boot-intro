@@ -20,7 +20,6 @@ Add a private user field of type User to your Post model, which will represent t
 
 ```java
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
 ```
 
@@ -30,11 +29,18 @@ The @JoinColumn specifices which column in the post table will hold the foreign 
 
 This will also change the way we create a post, considering that the user's id won't be in the POST data sent in the request. We won't be implementing authentication quite yet, but we should set up our createPost function to allow for a user to be connected to each post. Use the UserRepository to query for a specific user (could be any existing user- we're just hardcoding the creator of each post for now) and attach them to each post you create.
 
+Now when we query for a post, it will have the user attached. But what about the other way around? You might have guessed we can add a similar annotation to the User model:
 
+```java
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
+    private Set<Post> posts;
+```
+
+Here, `mappedBy` is referring to what property of the Post model refers to the specific user.  Cascading is a database term meaning that the related model will be affected by changes to the current model, i.e. if a user is deleted, so are their posts. 
 
 ### Try it out!
 
-Try adding full CRUDability for two models and include the related "one" model when querying for the many side, i.e. a Post also has the user's data attached.
+Use Postman to test full CRUDability of users and posts, making sure that when a user is deleted, so are their associated posts. Also, try adding another model that would establish one to many relationships, such as comments, and/or another model that would establish a many to many relationship, such as "liking" a post. 
 
 
 ### Resources
