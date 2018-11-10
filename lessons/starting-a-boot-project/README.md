@@ -53,9 +53,9 @@ Inside of pom.xml, we'll add the necessary dependency to get started with Spring
     </build>
 ```
 
-Now that our dependencies are set up, let's create a new package inside the src/main/java folder. Let's just call it `hello` for our classic hello world example.
+Now that our dependencies are set up, let's create a new package inside the src/main/java folder. You could name this package however you'd like - I just called it `hello` for our classic hello world example.
 
-Create a new class called `Application` to serve as the entry point into our app. This class will contain our `main` function, which will actually run the application. 
+Inside of this package/directory, create a new class called `Application` to serve as the entry point into our app. This class will contain our `main` function, which will actually run the application. 
 
 ``` java
 import org.springframework.boot.SpringApplication;
@@ -78,11 +78,11 @@ Now that Maven has packaged the project, you can run the `.jar` file that lives 
 
 When you run the file, you should see a whole bunch of output in the terminal, and at the top should be your "hello world" message.
 
-So what? We got a server to log a message, big deal. Let's add a RestController to allow us to respond to requests! Make another class in the same package as your Application class, and add the following to it:
+So what? We got a server to log a message, big deal. Let's add a RestController to allow us to respond to requests! Make another class named MyController in the same package/directory as your Application class, and add the following to it:
 
 ```java
 @RestController
-public class HelloWorld {
+public class MyController {
     @GetMapping("/")
     public String hello(){
         return "hello out there";
