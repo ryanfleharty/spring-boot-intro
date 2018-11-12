@@ -154,6 +154,7 @@ Add login/registration to the react app, being sure to parse the responses and s
 
 ### Stretch Goals
 
+- Only authorize the post's creator to do things like edit a post or delete a post.
 - Use more of Spring Boot's built-in authentication methods and protocols. This will involve adding more to the Server Configuration.
 - Add social media authentication.
 
