@@ -89,7 +89,7 @@ public class Post {
 }
 ```
 
-Now we need a Repository to set up queries based on this model. Fortunately, Spring Boot has made this file extremely easy to set up:
+Now we need a Repository to set up queries based on this model. Let's create a PostRepository class inside the same package we've been using. Fortunately, Spring Boot has made this file extremely easy to set up:
 
 ```java
 // This will be AUTO IMPLEMENTED by Spring into a Bean called postRepository
