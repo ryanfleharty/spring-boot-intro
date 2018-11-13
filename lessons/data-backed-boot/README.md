@@ -51,7 +51,7 @@ We will also need to set up some configuration for jdbc (java database connector
 spring.jpa.hibernate.dll-auto=create
 spring.datasource.url= jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
 spring.datasource.username=root
-spring.datasource.password=root
+spring.datasource.password=WHATEVER_PASSWORD_YOU_SET_DURING_INSTALL
 
 ```
 
