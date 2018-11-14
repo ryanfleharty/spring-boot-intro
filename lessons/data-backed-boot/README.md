@@ -19,7 +19,7 @@ Using MySQL to add a database to a Spring Boot Application
 
 Follow the instructions in the [previous lesson](../starting-a-boot-project) to set up a basic Spring Boot web application.
 
-Inside of pom.xml, we'll add some new dependencies to allow us to connect with a MySql database. Add the following to the list of dependencies in your pom.xml file:
+Inside of pom.xml, we'll add some new dependencies to allow us to connect with a MySql database. Add the following to the list of dependencies in your pom.xml file, inside of the `<dependencies>` tags:
 ```xml
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -51,7 +51,7 @@ We will also need to set up some configuration for jdbc (java database connector
 spring.jpa.hibernate.dll-auto=create
 spring.datasource.url= jdbc:mysql://localhost:3306/YOUR_DATABASE_NAME
 spring.datasource.username=root
-spring.datasource.password=WHATEVER_PASSWORD_YOU_SET_DURING_INSTALL
+spring.datasource.password=WHATEVER_PASSWORD_YOU_SET
 
 ```
 
