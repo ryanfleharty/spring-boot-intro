@@ -95,7 +95,7 @@ Now we need a Repository to set up queries based on this model. Let's create a P
 // This will be AUTO IMPLEMENTED by Spring into a Bean called postRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface PostRepository extends CrudRepository<Post, Integer> {
+public interface PostRepository extends CrudRepository<Post, Long> {
 
 }
 ```
