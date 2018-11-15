@@ -116,11 +116,11 @@ Now, you can set up a route that will fetch all of the posts and return them.
     }
 ```
 
-POST requests can be mapped to the attributes of the model you're trying to create. @ModelAttribute can be used inside the parameters of a controller function to define the post data according to a model.
+POST requests can be mapped to the attributes of the model you're trying to create. @RequestBody can be used inside the parameters of a controller function to define the post data.
 
 ```java
     @PostMapping("/posts")
-    public Post createPost(@ModelAttribute Post post){
+    public Post createPost(@RequestBody Post post){
         Post createdPost = postRepository.save(post);
         return createdPost;
     }

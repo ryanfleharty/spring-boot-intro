@@ -118,8 +118,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
-Now, we'll update our user creation route to make use of the new UserService method:
+Now, we'll update our user creation route to make use of the new UserService method. Be sure to inject the UserService into the controller, the same way that we put the userRepository and postRepository in there (including the @AutoWired annotation).
 
+In the controller:
 ```java
    @PostMapping("/users")
     public User createUser(@ModelAttribute User user){
