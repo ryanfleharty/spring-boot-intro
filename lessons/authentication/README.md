@@ -118,6 +118,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 ```
 
+Now, we'll update our user creation route to make use of the new UserService method:
+
+```java
+   @PostMapping("/users")
+    public User createUser(@ModelAttribute User user){
+        User createdUser = userService.saveUser(user);
+        return createdUser;
+    }
+```
+
 ## Make a Login Route
 
 Add to controller, while making the necessary imports (intelliJ should help you with that!)
