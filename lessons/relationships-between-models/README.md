@@ -41,13 +41,15 @@ Here, `mappedBy` is referring to what property of the Post model refers to the s
 
 If you query it now, you will get a circular reference causing infinite recursion! When you grab a post, it will grab the user, which will try to grab the associated posts, which will grab the user, which will try to grab the associated posts...
 
-There are several fixes to this issue, one of which is adding the following annotation to both models:
+There are several fixes to this issue, one of which is adding the following annotation to the Posts field in the User model:
 
 ```java
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+    @OneToMany(cascade= CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    private Set<Post> posts;
 ```
+
+@JsonIgnore lets us ignore the list of posts when returning a user in JSON format. If we want to query for all the posts of a particular user, I would recommend creating a `users/{userId}/posts` route that returns all posts by the given user.
 
 You can google around for various other solutions to the problem of infinite recursion when loading associations with Hibernate in Spring Boot projects.
 

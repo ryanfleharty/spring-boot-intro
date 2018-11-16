@@ -18,7 +18,6 @@ Enable CORS requests to allow a React front-end to interact with our Java Spring
 Create a new Java class called CorsConfig. Add the following:
 
 ```java
-package hello;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;

@@ -86,6 +86,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
+}
 ```
 
 This pattern lets us inject the password encoder throughout our application. Now that we're using the security package, we have to configure the security settings of our app with a new class called SecurityConfiguration:  
