@@ -19,9 +19,9 @@ Using Maven to build a Spring Boot project.
 
 ## Getting Started
 
-In your intelliJ text editor, start a new project configured with Maven. You should see the familiar src/main/java folder structure from the lesson on building Maven projects.
+In your intelliJ text editor, start a new project configured with Maven. Do not choose any archetypes to start from. You should see the familiar src/main/java folder structure from the lesson on building Maven projects.
 
-Inside of pom.xml, we'll add the necessary dependency to get started with Spring Boot. Fortunately, the necessary packages to quickly get a project running have been bundled into `starters`. Add the following to your pom.xml file:
+Inside of pom.xml, we'll add the necessary dependency to get started with Spring Boot. Fortunately, the necessary packages to quickly get a project running have been bundled into `starters`. Add the following to your pom.xml file, directly underneath the `<version>` tags, still inside the `<project>` tags.
 
 ```xml
     <!-- > Define the project as using spring boot starters <-->
