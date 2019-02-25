@@ -124,7 +124,7 @@ Now, we'll update our user creation route to make use of the new UserService met
 In the controller:
 ```java
    @PostMapping("/users")
-    public User createUser(@ModelAttribute User user){
+    public User createUser(@RequestBody User user){
         User createdUser = userService.saveUser(user);
         return createdUser;
     }
