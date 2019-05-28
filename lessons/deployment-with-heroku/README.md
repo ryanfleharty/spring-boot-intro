@@ -17,9 +17,10 @@ Deploy your Java Spring Boot server on Heroku to power fully accessible applicat
 
 Commit your project to a local git repository to prepare for deployment to Heroku. At the root level of your project (where you can see `pom.xml`) run the following: 
 
-`git init`
-`git add .`
-`git commit -m "ready for deployment"`
+```git init
+git add .
+git commit -m "ready for deployment"
+```
 
 Then, create a new heroku application and connect it with the local repository. This can be done by either running a `heroku create` command directly in the terminal, or by using the heroku.com interface and pasting the relevant commands to add a `heroku remote` connection to your local repository.
 
