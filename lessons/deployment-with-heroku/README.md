@@ -15,12 +15,14 @@ Deploy your Java Spring Boot server on Heroku to power fully accessible applicat
 
 ---
 
-Commit your project to a local git repository to prepare for deployment to Heroku. At the root level of your project (where you can see `pom.xml`) run the following: 
+Commit your project to a local git repository to prepare for deployment to Heroku. If you don't already have a git repository for your Java project, at the root level of your project (where you can see `pom.xml`) run the following: 
 
 ```git init
 git add .
 git commit -m "ready for deployment"
 ```
+
+Ensure that `pom.xml` is at the root level of your repository! Heroku will need it to understand this is a Java project built with Maven.
 
 Then, create a new heroku application and connect it with the local repository. This can be done by either running a `heroku create` command directly in the terminal, or by using the heroku.com interface and pasting the relevant commands to add a `heroku remote` connection to your local repository.
 
@@ -38,7 +40,7 @@ The url contains the following information:
 
 `mysql://USERNAME:PASSWORD@URL-TO-CONNECT-TO/DEFAULT-SCHEMA?reconnect=true`.
 
-In MySql Workbench, you can create a new connection by providing the details from this url in the necessary fields. The SQL server will be running on port 3306. Once you've established the connection, you can perform all the same Table creation commands we used to set up our database locally. This should get rid of the deployed application's connection errors!
+In MySql Workbench, you can create a new connection by providing the details from this url in the necessary fields. For example, the `host name` that a new MySQl Workbench connection asks for will be provided in the url between the `@` and `/` symbols, something like `us-cdbr-iron-east-02.cleardb.net`. The username is the first string of digits and letters, followed by the password after the `:`. The SQL server will be running on port 3306. Once you've established the connection, you can perform all the same Table creation commands we used to set up our database locally. This should get rid of the deployed application's connection errors!
 
 Now you can make requests to your server from a deployed react application or Postman! You will likely have to change the specifics in your CorsConfig to point to the address of your deployed Heroku app, in addition to changing the React app's fetch calls to now point to the deployed Java application. 
 
